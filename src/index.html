@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Random walk</title>
+		<meta name="description" content="One-dimensional random walk simulation">
+		<meta name="author" content="Nikola Ubavić">
+		<script src="./rw.js"></script>
+		<style>
+			#cvs, #cvs2 {border: 1px solid black;}
+		</style>
+	</head>
+	<body>
+		<h1>Random walk</h1>
+		<p>Below is given one-dimensional random walk simulation. In each step every particle can change its position by +1 with probability <var>p</var> or by -1 with probability 1-<var>p</var>.</p>
+		<table>
+			<tbody>
+				<tr>
+					<td>Number of experiments (particles)</td>
+					<td><input type="number" id="expSize" min="1" max="10000" value="200" onchange="updateVariables()"> (1-10.000)</td>
+				</tr>
+				<tr>
+					<td>Number of steps in each experiment</td>
+					<td><input type="number" id="expLen" min="10" max="10000" value="20" onchange="updateVariables()"> (10-10.000)</td>
+				</tr>
+				<tr>
+					<td>Probability <var>p</var> (in percents)</td>
+					<td><input type="number" id="prob" min="0" max="100" value="50" onchange="updateVariables()"> (0-100)</td>
+				</tr>
+			</tbody>
+		</table>
+		<button onclick="start()">Start simulation</button>
+		<p>Particles trajectories:</p>
+		<canvas id="cvs" width=800 height=600>
+			Your browser doesn't support canvas.
+		</canvas>
+		<p>Distribution of final positions:</p>
+		<canvas id="cvs2" width=800 height=200>
+			Your browser doesn't support canvas.
+		</canvas>
+		<p>Statistics:</p>
+		<table>
+			<tbody>
+				<tr>
+					<td></td>
+					<td>E(<var>S</var><sub><var>n</var></sub>)</td>
+					<td>σ(<var>S</var><sub><var>n</var></sub>)</td>
+					<td>min <var>S</var><sub><var>n</var></sub></td>
+					<td>max <var>S</var><sub><var>n</var></sub></td>
+				</tr>
+				<tr>
+					<td>Experiment</td>
+					<td id="EE"></td>
+					<td id="ESD"></td>
+					<td id="EMIN"></td>
+					<td id="EMAX"></td>
+				</tr>
+				<tr>
+					<td>Model</td>
+					<td id="ME"></td>
+					<td id="MSD"></td>
+					<td id="MMIN"></td>
+					<td id="MMAX"></td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			initialize();
+			start();
+		</script>
+	</body>
+</html>
